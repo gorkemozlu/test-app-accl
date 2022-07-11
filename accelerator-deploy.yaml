@@ -1,0 +1,15 @@
+apiVersion: accelerator.apps.tanzu.vmware.com/v1alpha1
+kind: Accelerator
+metadata:
+  name: tanzu-demo
+spec:
+  displayName: Tanzu demo
+  description: Tanzu demo
+  iconUrl: https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Spring_Framework_Logo_2018.svg/800px-Spring_Framework_Logo_2018.svg.png
+  tags:
+    - demo
+  git:
+    ignore: ".git/, target, catalog"
+    url: https://github.com/gorkemozlu/test-app-accl
+    ref:
+      branch: main
