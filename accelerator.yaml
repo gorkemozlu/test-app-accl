@@ -1,0 +1,82 @@
+accelerator:
+  displayName: Tanzu Demo
+  description: Accelerator
+  iconUrl: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1280px-Node.js_logo.svg.png
+  tags:
+  - demo
+
+  options:
+  
+         
+  - name: gitRepo
+    label: Git repo
+    inputType: text
+    required: true
+    dataType: string
+    defaultValue: https://github.com/gorkemozlu/test-app-accl/
+    
+  - name: parentApp
+    label: Name of parent application (the Big A app)
+    description: Name of the parent application this component is a part of
+    inputType: text
+    dataType: string
+    defaultValue: banking-demo
+
+  - name: namespaceToDeploy
+    label: Namespace to deploy
+    description: Please type the namespace to deploy
+    inputType: text
+    dataType: string
+    defaultValue: dev
+
+  - name: accountServiceDeploy
+    label: Deploy Account-Service ?
+    inputType: checkbox
+    display: true
+    dataType: boolean
+    defaultValue: false
+  
+  - name: accountServiceDeployState
+    label: Choose Account-Service
+    dependsOn:
+      name: accountServiceDeploy
+    inputType: select
+    defaultValue: newAccountServiceDevelop
+    choices:
+      - value: newAccountServiceDevelop
+        text: Develop from source code
+      - value: newAccountServiceDeploy
+        text: Deploy only
+      - value: existingAccountService
+        text: Use Existing
+  - name: accountServiceDeployName
+    label: Choose service name of Account-Service.
+    describe: Change default value if needed
+    dependsOn:
+      name: accountServiceDeploy
+    inputType: text
+    dataType: string
+    defaultValue: account-svc # double check.
+
+  - name: hasTestsAccountService
+    label: Do CI test
+    dependsOn:
+      name: accountServiceDeploy
+    inputType: checkbox
+    display: true
+    dataType: boolean
+    defaultValue: false
+
+  - name: branchNameAccountService
+    label: Branch of the Account-Service
+    description: Please type the branch to use - Skip this value if using existing.
+    dependsOn:
+      name: accountServiceDeploy
+    inputType: text
+    dataType: string
+    defaultValue: main
+
+engine:
+  merge:
+    #generic transformations
+    - includes: ["**"]
